@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<div id="loading" style="position:absolute;top:0px;left:0px;right:0px;z-index:10;background:white;height:100%;width:100%">
+		<img src="images/loading.jpg" style="display: block;position:absolute;top:35%;left:35%;width:30%"></img>
+	</div>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+	<script>
+			function onLoad(){
+				document.addEventListener("deviceready", onDeviceReady, false);
+			}
+			function onDeviceReady() {// Register the event listener
+				document.addEventListener("backbutton", onBackKeyDown, false);
+			}
+			function onBackKeyDown() {
+					showConfirm();
+			}
+			
+			function onConfirm(buttonIndex) {
+				if(buttonIndex===2){
+					navigator.app.exitApp();
+					}
+			}
+			function showConfirm() {
+				navigator.notification.confirm(
+					'Are you sure ?',  // message
+					onConfirm,         // callback to invoke with index of button pressed
+					'Exit',            // title
+					'No,Yes'          // buttonLabels
+				);
+			}
+
+		</script>
+	<div id="display" style="display:none"></div>
+	<script>
+	var width=window.innerWidth;
+	var height=window.innerHeight;
+	var fsize=Math.round(height*0.07);
+	var margin=Math.round(height*0.055*0.2);
+	document.getElementById("display").innerHTML="<style>\
+	#exit,#play{margin:"+margin+"px;\
+	width:62%;font-size:"+fsize+"px;border-radius:"+(fsize*3)+"px;border:"+(margin/2)+"px outset white;\
+	height:"+(Math.round(fsize+margin))+"px;padding:"+margin*1.5+"px "+margin*1.5+"px;\
+	letter-spacing:0.05em;color:#fff;}\
+	html, body {\
+		height: 100%; width: 100%; margin: 0; padding:0px;\
+		boundry:0px;font-size:"+fsize+"px;\
+	}\
+	header{font-weight:1000;text-shadow: 0px 1px 10px #000;\
+	text-align:center; margin:10px;text-shadow: 0px 1px 1px #ddd, 0px 2px 1px #d6d6d6, 0px 3px 1px #ccc, 0px 4px 1px #c5c5c5, 0px 5px 1px #c1c1c1,0px 6px 1px #bbb,0px 7px 1px #777, 0px 8px 3px rgba(100, 100, 100, 0.4)\
+	}</style> ";	
+	</script>
+	<script src="js/dictionary.js"></script>
+	</head>
+	<body onload="onLoad()" style="font:Calibri;color:white;background-image:url('images/back.jpg')">
+		<center><img style="width:100%;height:45%" src="images/logo.png"></img></center>
+		<header style="">
+			World of Words
+		</header>		
+		<section>
+			<center>
+				<div style="background-image:url('images/button.jpg');background-size:100% 100%;background-repeat:no-repeat;" ontouchstart="play()" id="play">Play</div>
+			</center>
+			<center>
+				<div style="background-image:url('images/button.jpg');background-size:100% 100%;background-repeat:no-repeat;" ontouchstart="exit();showConfirm();" id="exit">Exit</div>
+			</center>
+		</section>
+		<script>
+			function play(){
+				document.getElementById('play').style.opacity=0.5;
+				setTimeout(function(){document.getElementById('play').style.opacity=1;},300);
+				setTimeout(function(){window.location.href='play.html';},1500)
+			}
+			function exit(){
+				document.getElementById('exit').style.opacity=0.5;
+				document.getElementById('exit').style.opacity=1;
+			}
+		</script>
+	</body>
+</html>
+
