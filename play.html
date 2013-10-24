@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+	<div id="loading_id" style="position:absolute;top:0px;z-index:10;background:white;height:100%;width:100%">
+		<img src="images/loading.jpg" style="display: block;position:absolute;top:35%;left:35%;width:30%"></img>
+	</div>
+    <head>
+	    <meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+	</head>
+	<div id="display_id"></div>
+	<script>
+		var width=window.innerWidth;
+		var height=window.innerHeight;
+		var fsize=Math.round(height*0.048);
+		var margtop=Math.round(fsize*0.15);
+		var imgtop=Math.round(height*0.06);
+		var imghei=Math.round(height*0.3);
+		var blocksize=Math.round(width*0.05);
+		var margright=Math.round(fsize*0.2);
+		var imgwidth=Math.round(width*0.5);
+		var sappw=Math.round(width*0.97/blocksize);
+		var sapph=Math.round(height*0.49/blocksize);
+		var appw=sappw*blocksize;
+		var apph=sapph*blocksize;
+		document.getElementById("display_id").innerHTML="<style>\
+		#dispScore_id{top:35%;position:absolute;z-index:13;font-weight:2000;text-shadow: 0px 1px 10px #000;font-size:"+(fsize*2)+"px;left:"+(Math.round(width/2-fsize*2))+"px;}\
+		#append_id,#con_id{font-size:"+fsize+"px;font-weight:400;}\
+		#clockimg_id{height:"+fsize+"px;background-size:"+(fsize)+"px "+(fsize)+"px}\
+		body, html{font-family:monospace,serif;height:100%;width:100%;margin:0px;border:0px;padding:0px;}\
+		#ran_id{position:absolute;z-index:0;top:78%;left:17%;right:17%;height:22%;width:66%}\
+		table{font-weight:400;font-size:"+fsize+"px;padding:0px;background-image:url('images/topbar.png');;margin:0px;}\
+		b.but1{width:"+blocksize+"px;height:"+blocksize+"px;color:#A80000  ;background-image:url('images/block.png');background-repeat:no-repeat;background-size:100% 100%;font-weight:700;color:white;text-align:center;text-transform:uppercase;font-size:"+fsize+";float:left;display:block;}\
+		#con_id{color: #25383C;border:"+margtop*0.8+"px solid brown;;border-radius: 25px;position:absolute;top:69%;font-size:"+fsize+";text-transform:uppercase;font-weight:600;left:16%;right:16%;height:6%;text-align:center;}\
+		#backbut_id{-webkit-tap-highlight-color: rgba(0,0,0,0);background-image:url('images/back.png');background-size:100% 100%;width:15%;height:13%;position:absolute;top:67%;right:0%;z-index:0;}\
+		#reset_id{-webkit-tap-highlight-color: rgba(0,0,0,0);position:absolute;z-index:0;top:67%;left:0%;height:13%;width:15%;background-image:url('images/close.png');background-size:100% 100%;}\
+		#scramble_id{-webkit-tap-highlight-color: rgba(0,0,0,0);position:absolute;z-index:0;background-image:url('images/shuffle.png');background-repeat:no-repeat;background-size:100% 100%;top:83%;left:0%;height:17%;width:18%;}\
+		#enterbut_id{-webkit-tap-highlight-color: rgba(0,0,0,0);position:absolute;z-index:0;background-image:url('images/enter.png');background-size:100% 100%;background-repeat:no-repeat;top:83%;right:0%;width:18%;height:17%;}\
+		#text1_id{margin-left:10px;color:brown;font-weight:700;margin-left:10px;font-size:"+fsize*0.8+"px};\
+		#clockimg_id{height:"+fsize+"px;background-size:"+(fsize)+"px "+(fsize)+"px}\
+		#append_id{z-index:0;}</style>";</script>
+	<style>
+		body{
+			background-image:url('images/back.jpg');
+			}
+	</style>
+	<body style="color:white;">
+		<div id="topTable_id" script=""><center><table style="width:100%;height:12%">
+			<td style="width:66%;text-indent:7px;"><div id="Score_id">Score: 0</div></td>
+			<td style="height:100%;"><div id="clockimg_id" style=";background-image:url('images/clock.png');background-repeat:no-repeat;"></div></td>
+			<td style="Width:23%;"><div  id="clock_id">2:00</div></td></tr>
+			</table></center>
+		</div>
+		<!--- twitter @brianantony456 -->
+		<div id="text1_id" style="">Level:1</div>
+		<div id="fix_id">
+		<div style="margin-left:auto;margin-right:auto;" id="append_id">
+			<div id="one_id"style="width:20%;height:53%;position:absolute;left:5%;overflow-x:hidden;overflow-y:scroll;"></div>
+			<div id="two_id" style="width:25%;height:53%;position:absolute;left:30%;overflow-x:hidden;overflow-y:scroll;"></div>
+			<div id="three_id" style="width:40%;height:53%;;position:absolute;left:59%;overflow-x:hidden;overflow-y:scroll;"></div>
+		</div>
+		</div>
+	<div id="dispScore_id" style="display:none;text-shadow: 0px 1px 1px #ddd, 0px 2px 1px #d6d6d6, 0px 3px 1px #ccc, 0px 4px 1px #c5c5c5, 0px 5px 1px #c1c1c1,0px 6px 1px #bbb,0px 7px 1px #777, 0px 8px 3px rgba(100, 100, 100, 0.4);"></div>
+	<div id="alert_id" style="position:absolute;z-index:4;height:100%;width:100%;top:0%;display:none;"></div>
+	<div id="reset_id" ontouchstart="reset()"></div>
+	<div id="con_id" style="background:white;background-color:white;vertical-align:middle;"></div>
+	<div ontouchstart="backPressed()" id="backbut_id"></div>
+	<div id="footer_id" style="width:100%;"> 
+		<div ontouchstart="scrabble()" id="scramble_id"></div>
+		<div id="ran_id" style=""></div>
+		<div ontouchstart="enterPressed()" id="enterbut_id"></div>	
+	</div>
+	<!--- twitter @brianantony456 -->
+	<div id="dictionary_id" style="position:absolute;background:white;top:0px;z-index:12; height:100%;width:100%;overflow-x:hidden;overflow-y:scroll;display:none"></div>
+	</body>
+	<script src="js/reference.js"></script>
+		<!--- twitter @brianantony456 -->
+</html>
